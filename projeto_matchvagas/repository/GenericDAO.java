@@ -31,8 +31,4 @@ public abstract class GenericDAO<T> {
       this.db.set(index, dadoNovo);
     }
 
-
-
-
-
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public abstract class GenericDAO<ID, T extends GenericDomain<ID>> {
+ abstract class GenericDAO<ID, T extends GenericDomain<ID>> {
 
     private final List<T> db = new ArrayList<>();
 

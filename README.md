@@ -33,6 +33,6 @@ Projeto acadêmico da disciplina de Programação Orientada a Objetos da UnB uti
 ## 🚀 Como executar
 
 ```bash
-git clone https://github.com/Diasxz0/java-backend-learning.git
+git clone https://github.com/warlleymedeiros/java-backend-learning.git
 
 cd java-backend-learning

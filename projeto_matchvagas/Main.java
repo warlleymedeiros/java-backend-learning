@@ -13,9 +13,13 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static final Scanner scan = new Scanner(System.in);
     private static final GenericDAO<Candidato> candidatosDB = new RepositoryCandidato();
     private static final GenericDAO<Vagas> vagasDB = new RepositoryVagas();
     public static final MatchService matchservice = new MatchService();
+
+    private static final CandidatoConsole candidatoConsole = new CandidatoConsole(candidatosDB, scan);
+    private static final VagasConsole vagasConsole = new VagasConsole(vagasDB, scan);
 
     public static void main(String[] args) {
 
@@ -87,15 +91,11 @@ public class Main {
                         scan.nextLine(); // CORREÇÃO: Limpa o buffer do int!
 
                         switch (escolhaInterna) {
-                            case 1 -> {
-                                Vagas novaVaga = VagasConsole.criarVaga(scan);
-                                vagasDB.salvar(novaVaga);
-                                System.out.println("Vaga Cadastrada!");
-                            }
-                            case 2 -> VagasConsole.EditarDado(scan, vagasDB);
-                            case 3 -> VagasConsole.deletarVaga(scan, vagasDB);
-                            case 4 -> VagasConsole.BuscarCandidatoParaVaga(scan, vagasDB, candidatosDB, matchservice);
-                            case 5 -> System.out.println(vagasDB.listar());
+                            case 1 -> vagasConsole.cadastrar();
+                            case 2 -> vagasConsole.editar();
+                            case 3 -> vagasConsole.excluir();
+                            case 4 -> vagasConsole.buscarCandidatosParaVaga(candidatosDB, matchservice);
+                            case 5 -> vagasConsole.listar();
                             case 6 -> System.out.println("Voltando...");
                             default -> System.out.println("Opção inválida! Tente novamente.");
                         }
@@ -116,16 +116,11 @@ public class Main {
                         scan.nextLine();
 
                         switch (escolhaInterna) {
-                            case 1 -> {
-
-                                Candidato novoCandidato = CandidatoConsole.criarcandidato(scan);
-                                candidatosDB.salvar(novoCandidato);
-                                System.out.println("Candidato Cadastrado!");
-                            }
-                            case 2 -> CandidatoConsole.EditarDado(scan, candidatosDB);
-                            case 3 -> CandidatoConsole.deletarCandidato(scan, candidatosDB);
-                            case 4 -> CandidatoConsole.BuscarVagasParaCandidato(scan, candidatosDB, vagasDB, matchservice);
-                            case 5 -> System.out.println(candidatosDB.listar());
+                            case 1 -> candidatoConsole.cadastrar();
+                            case 2 -> candidatoConsole.editar();
+                            case 3 -> candidatoConsole.excluir();
+                            case 4 -> candidatoConsole.buscarVagasParaCandidato(vagasDB, matchservice);
+                            case 5 -> candidatoConsole.listar();
                             case 0 -> System.out.println("Voltando...");
                             default -> System.out.println("Opção inválida! Tente Novamente.");
                         }
